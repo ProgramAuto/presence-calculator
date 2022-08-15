@@ -56,11 +56,6 @@ def main():
     if(os.path.isfile(sys.argv[1])):
         with open(os.path.join(os.getcwd(), sys.argv[1]), 'r') as file:
             data = regex(file.read(), data)
-
-    # with open("programauto/2020s1-03-09-programauto.md", 'r') as file:
-    #     data = regex(file.read(), data)
-            # print(file.readlines())
-        # print(os.path.join(os.getcwd(), sys.argv[1]))
     
     if(os.path.isdir(sys.argv[1])):
         for files in os.listdir(sys.argv[1]):
@@ -76,6 +71,5 @@ def main():
                 continue
             writer.writerow([key,value])
 
-main()
-
-# "^[\d ]+\| ([\w ]+)\| [@a-zA-Z0-9 ]+\|"gm
+if __name__ == '__main__':
+  main()
