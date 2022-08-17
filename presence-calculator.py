@@ -53,11 +53,22 @@ def main():
     header = ['Nome Completo', 'Presence']
     data = {}
     now = time.now()
-    if(os.path.isfile(sys.argv[1])):
+
+    try:
+        argValidator = os.path.isfile(sys.argv[1]) or os.path.isdir(sys.argv[1])
+    except:
+        print("Ops! you need to specify a filename or directory")
+        sys.exit()
+
+    if((not os.path.isdir(sys.argv[1])) and (not os.path.isfile(sys.argv[1]))):
+        print("Ops! the file or directory doesn't exist")
+        sys.exit()
+
+    elif(os.path.isfile(sys.argv[1])):
         with open(os.path.join(os.getcwd(), sys.argv[1]), 'r') as file:
             data = regex(file.read(), data)
     
-    if(os.path.isdir(sys.argv[1])):
+    elif(os.path.isdir(sys.argv[1])):
         for files in os.listdir(sys.argv[1]):
             with open(os.path.join(os.getcwd(), sys.argv[1], files), 'r') as file:
                 data.update(regex(file.read(),data))
